@@ -14,13 +14,13 @@ class CartProvider extends ChangeNotifier {
     return price;
   }
 
-  void addToCart({required Product items}) {
-    cartList.add(items);
+  void addToCart({required Product item}) {
+    cartList.add(item);
     notifyListeners();
   }
 
-  void removeFromCart({required Product items}) {
-    cartList.remove(items);
+  void emptyCart() {
+    cartList = [];
     notifyListeners();
   }
 }

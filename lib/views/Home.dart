@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_app/helper/menu.dart';
 import 'package:food_ordering_app/models/category.dart';
+import 'package:food_ordering_app/views/Products.dart';
+import 'package:food_ordering_app/widgets/CartFloatingButton.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<Home> {
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
       ),
+      floatingActionButton: const CartFloatingButton(),
       body: FutureBuilder<List<Category>>(
         future: MenuDatabaseHelper.getCategories(),
         builder: (context, snapshot) {
@@ -30,9 +26,32 @@ class _HomePageState extends State<Home> {
             return ListView.builder(
               itemCount: categories.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(categories[index].name),
-                  // Other UI components or logic as needed
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Products(
+                          categoryId: categories[index].id,
+                          categoryName: categories[index].name,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Image.asset(categories[index].image),
+                        ListTile(
+                          title: Text(
+                            categories[index].name,
+                            style: const TextStyle(fontSize: 30),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );

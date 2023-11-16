@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_ordering_app/helper/initialise_data.dart';
 import 'package:food_ordering_app/provider/cartProvider.dart';
+import 'package:food_ordering_app/views/Checkout.dart';
 import 'package:food_ordering_app/views/Home.dart';
+import 'package:food_ordering_app/views/Products.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -15,10 +17,9 @@ void main() async {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const Home(),
-        // 'products': (context) => const Products(),
-        // 'productDetails': (context) => const ProductDetails(),
-        // 'cart': (context) => const Cart(),
+        '/': (context) => Home(),
+        'products': (context) => Products(),
+        'checkout': (context) => const Checkout(),
         // 'ordersHistory': (context) => const OrdersHistory(),
       },
     ),

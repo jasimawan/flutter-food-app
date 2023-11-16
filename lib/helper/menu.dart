@@ -15,18 +15,18 @@ class MenuDatabaseHelper {
 
     return List.generate(categoryMaps.length, (i) {
       return Category(
-        id: categoryMaps[i]['id'],
-        name: categoryMaps[i]['name'],
-      );
+          id: categoryMaps[i]['id'],
+          name: categoryMaps[i]['name'],
+          image: categoryMaps[i]['image']);
     });
   }
 
-  static Future<List<Product>> getProducts() async {
+  static Future<List<Product>> getProducts(int categoryId) async {
     var path = await generateDatabasePath();
     final Database database = await openDatabase(path);
 
-    final List<Map<String, dynamic>> productMaps =
-        await database.query('products');
+    final List<Map<String, dynamic>> productMaps = await database
+        .query('products', where: 'category_id = ?', whereArgs: [categoryId]);
 
     await database.close();
 

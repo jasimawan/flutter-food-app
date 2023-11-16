@@ -13,7 +13,7 @@ class DatabaseHelper {
       version: 1,
       onCreate: (db, version) {
         db.execute(
-          'CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT)',
+          'CREATE TABLE categories(id INTEGER PRIMARY KEY, name TEXT, image TEXT)',
         );
         db.execute(
           'CREATE TABLE products(id INTEGER PRIMARY KEY, category_id INTEGER, name TEXT, price REAL, description TEXT, image_url TEXT)',
@@ -34,16 +34,18 @@ class DatabaseHelper {
   }
 
   static Future<void> _initializeCategories(Database database) async {
-    await database.insert('categories', {'name': 'Burgers'});
-    await database.insert('categories', {'name': 'Cold Drinks'});
-    await database.insert('categories', {'name': 'Fries'});
+    await database.insert(
+        'categories', {'name': 'Burgers', 'image': 'asset/chicken_burger.png'});
+    await database.insert(
+        'categories', {'name': 'Cold Drinks', 'image': 'asset/coke.png'});
+    await database
+        .insert('categories', {'name': 'Fries', 'image': 'asset/fries.png'});
   }
 
   static Future<void> _initializeProducts(Database database) async {
     for (final product in menuList) {
-      print(product);
       await database.insert('products', {
-        'category_id': product['categoryI'],
+        'category_id': product['categoryId'],
         'name': product['name'],
         'price': product['price'],
         'image_url': product['image'],
