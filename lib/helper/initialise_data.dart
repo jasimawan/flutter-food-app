@@ -22,7 +22,7 @@ class DatabaseHelper {
           'CREATE TABLE orders(id INTEGER PRIMARY KEY AUTOINCREMENT, total_amount REAL, order_date TEXT)',
         );
         db.execute(
-          'CREATE TABLE order_items(id INTEGER PRIMARY KEY AUTOINCREMENT, order_id INTEGER, product_id INTEGER, product_name TEXT, product_price REAL, quantity INTEGER)',
+          'CREATE TABLE order_items(id INTEGER PRIMARY KEY AUTOINCREMENT, order_id INTEGER, product_id INTEGER, product_name TEXT, product_price REAL, product_image TEXT, quantity INTEGER)',
         );
       },
     );

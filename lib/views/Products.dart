@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_ordering_app/helper/menu.dart';
 import 'package:food_ordering_app/models/product.dart';
 import 'package:food_ordering_app/provider/cartProvider.dart';
+import 'package:food_ordering_app/views/OrdersHistory.dart';
 import 'package:food_ordering_app/widgets/CartFloatingButton.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,20 @@ class Products extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryName ?? ""),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrdersHistory(),
+                ),
+              );
+            },
+            child: const Text('Orders History'),
+          ),
+          const Padding(padding: EdgeInsets.only(right: 10))
+        ],
       ),
       floatingActionButton: const CartFloatingButton(),
       body: FutureBuilder<List<Product>>(
